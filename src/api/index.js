@@ -6,7 +6,9 @@ class Api {
   }
 
   async fetchTestSuite(id) {
+    const testSuite = await this._get(`/test_suites/${ id }`)
 
+    return testSuite
   }
 
   async _get(path) {

@@ -5,8 +5,8 @@ import {
 } from 'react-router-dom'
 
 import { TestSuitesRoute } from './routes/test-suites'
-import { TestSuiteRoute } from './routes/test-suites/test-suite'
-import { EditTestSuiteRoute } from './routes/test-suites/test-suite/edit'
+import { ListTestSuitesRoute } from './routes/test-suites/list'
+import { EditTestSuiteRoute } from './routes/test-suites/edit'
 import { StoreContextProvider } from './store'
 
 export function App() {
@@ -18,18 +18,18 @@ export function App() {
             <Routes>
 
               <Route
-                element={ <TestSuitesRoute /> }
+                element={<TestSuitesRoute />}
                 path='/'
               >
                 <Route
-                  element={ <TestSuiteRoute /> }
-                  path='test-suites/:id'
-                >
-                  <Route
-                    element={ <EditTestSuiteRoute /> }
-                    path='test-suites/:id/edit'
-                  />
-                </Route>
+                  element={ <ListTestSuitesRoute /> }
+                  index
+                />
+
+                <Route
+                  element={<EditTestSuiteRoute />}
+                  path='/test-suites/:id/edit'
+                />
               </Route>
 
             </Routes>
