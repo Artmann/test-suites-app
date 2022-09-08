@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
@@ -103,6 +104,12 @@ function TestSuiteRow({ id, name, testPlans }) {
   )
 }
 
+TestSuiteRow.propTypes = {
+  id: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+  testPlans: PropTypes.array.isRequired
+}
+
 function TestPlanRow({ browser, instructionCount, name }) {
   return (
     <div className='flex text-xs gap-4 py-2'>
@@ -121,4 +128,10 @@ function TestPlanRow({ browser, instructionCount, name }) {
 
     </div>
   )
+}
+
+TestPlanRow.propTypes = {
+  browser: PropTypes.string.isRequired,
+  instructionCount: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired
 }
