@@ -32,18 +32,8 @@ export function StoreContextProvider({ children }) {
     }
   }
 
-  const fetchTestSuite = (id) => {
-    return api.fetchTestSuite(id).then((newTestSuite) => {
-      setTestSuites({
-        ...testSuites,
-        [newTestSuite.id]: newTestSuite
-      })
-    })
-  }
-
   const value = {
     error,
-    fetchTestSuite,
     fetchTestSuites,
     isLoading,
     testSuites: Object.values(testSuites)
