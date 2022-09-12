@@ -99,7 +99,7 @@ TestSuiteRow.propTypes = {
   id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   testPlans: PropTypes.array.isRequired
-}
+};
 
 function TestPlanRow({ browser, instructionCount, name }) {
   return (

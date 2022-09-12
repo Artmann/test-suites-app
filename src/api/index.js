@@ -16,19 +16,19 @@ class Api {
   }
 
   async _request(path, method) {
-    const host = process.env['API_URL'] ?? 'http://localhost:3456'
-    const url = `${host}${path}`
+    const host = process.env.API_URL || 'http://localhost:3456'
+    const url = `${ host }${ path }`
 
     const response = await fetch(url, {
       headers: {
-        'Accept': 'application/json',
+        Accept: 'application/json',
         'Content-Type': 'application/json'
       },
       method
     })
 
     if (!response.ok) {
-      throw new Error(`Request failed with status ${response.status}`)
+      throw new Error(`Request failed with status ${ response.status }`)
     }
 
     const data = await response.json()

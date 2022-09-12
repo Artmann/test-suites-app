@@ -1,0 +1,16 @@
+{
+  "extends": "airbnb",
+  "rules": {
+    "class-methods-use-this": "off",
+    "comma-dangle": [ "error", "never" ],
+    "import/prefer-default-export": "off",
+    "linebreak-style": "off",
+    "no-underscore-dangle": "off",
+    "quotes": [ "error", "single" ],
+    "react/jsx-curly-spacing": [ "error", "always" ],
+    "react/jsx-filename-extension": [ 1, { "extensions": [ ".js", ".jsx" ] } ],
+    "react/react-in-jsx-scope": "off",
+    "semi": [ "error", "never" ],
+    "template-curly-spacing": [ "error", "always" ]
+  }
+}

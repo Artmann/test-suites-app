@@ -11,15 +11,15 @@ import { StoreContextProvider } from './store'
 
 export function App() {
   return (
-    <div className='text-gray-700 mx-auto container max-w-6xl'>
-      <div className='p-8 '>
+    <div className="text-gray-700 mx-auto container max-w-6xl">
+      <div className="p-8 ">
         <StoreContextProvider>
           <BrowserRouter>
             <Routes>
 
               <Route
-                element={<TestSuitesRoute />}
-                path='/'
+                element={ <TestSuitesRoute /> }
+                path="/"
               >
                 <Route
                   element={ <ListTestSuitesRoute /> }
@@ -27,8 +27,8 @@ export function App() {
                 />
 
                 <Route
-                  element={<EditTestSuiteRoute />}
-                  path='/test-suites/:id/edit'
+                  element={ <EditTestSuiteRoute /> }
+                  path="/test-suites/:id/edit"
                 />
               </Route>
 

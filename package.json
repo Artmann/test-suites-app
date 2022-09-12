@@ -4,6 +4,7 @@
   "private": true,
   "main": "api/index.js",
   "scripts": {
+    "lint": "eslint src",
     "start": "concurrently \"yarn start:server\" \"yarn start:client\"",
     "start:client": "react-scripts start",
     "start:server": "nodemon",
@@ -36,6 +37,12 @@
     "@testing-library/user-event": "^14.4.3",
     "autoprefixer": "^10.4.8",
     "concurrently": "^7.4.0",
+    "eslint": "^8.23.1",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.6.1",
+    "eslint-plugin-react": "^7.31.8",
+    "eslint-plugin-react-hooks": "^4.6.0",
     "nodemon": "^2.0.19",
     "postcss": "^8.4.16",
     "tailwindcss": "^3.1.8"
