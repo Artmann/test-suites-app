@@ -182,4 +182,56 @@ describe('ListTestSuitesRoute', () => {
     }, null, 2))
   })
 
+  it('removes a plan from the suite.', async () => {
+    const consoleSpy = jest.spyOn(console, 'log').mockImplementation(() => {})
+
+    const context = {
+      ...defaultContext,
+      testSuites: [
+        {
+          id: 1,
+          test_suite_name: 'Suite Mix Save Mental',
+          test_plans: [
+            {
+              test_name: 'Test Plan Stiff Any Main',
+              browser: 'firefox',
+              instruction_count: 33
+            },
+            {
+              test_name: 'Test Plan Pride Queen Travel',
+              browser: 'edge',
+              instruction_count: 13
+            }
+          ]
+        }
+      ]
+    }
+
+    userEvent.setup()
+
+    render(
+      <StoreContext.Provider value={context}>
+        <EditTestSuiteRoute />
+      </StoreContext.Provider>
+    , { wrapper: Wrapper })
+
+    const buttons = screen.getAllByText('Remove')
+
+    await userEvent.click(buttons[0])
+
+    await userEvent.click(screen.getByText('Save Changes'))
+
+    expect(consoleSpy).toHaveBeenCalledWith(JSON.stringify({
+      id: 1,
+      test_suite_name: 'Suite Mix Save Mental',
+      test_plans: [
+        {
+          test_name: 'Test Plan Pride Queen Travel',
+          browser: 'edge',
+          instruction_count: 13
+        }
+      ]
+    }, null, 2))
+  })
+
 })

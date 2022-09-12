@@ -34,10 +34,11 @@ export function EditTestSuiteRoute() {
     setDraft(copy)
   }
 
-  const submitHandler = (e) => {
-    e.preventDefault()
-
-    console.log(JSON.stringify(draft, null, 2))
+  const removePlan = (index) => () => {
+    setDraft({
+      ...draft,
+      test_plans: draft.test_plans.filter((_, i) => i !== index)
+    })
   }
 
   const addTestPlanHandler = e => {
@@ -54,6 +55,12 @@ export function EditTestSuiteRoute() {
         }
       ]
     })
+  }
+
+  const submitHandler = (e) => {
+    e.preventDefault()
+
+    console.log(JSON.stringify(draft, null, 2))
   }
 
   return (
@@ -91,7 +98,8 @@ export function EditTestSuiteRoute() {
                 browser={ testPlan.browser }
                 instructionCount={ testPlan.instruction_count }
                 name={ testPlan.test_name }
-                updatePlan= { updatePlan(index) }
+                updatePlan={ updatePlan(index) }
+                removePlan={ removePlan(index) }
 
                 key={ index }
               />
@@ -120,7 +128,7 @@ export function EditTestSuiteRoute() {
   )
 }
 
-function TestPlanRow({ browser, instructionCount, name, updatePlan }) {
+function TestPlanRow({ browser, instructionCount, name, updatePlan, removePlan }) {
   return (
     <div className='flex text-xs gap-8 py-2 items-center'>
 
@@ -159,8 +167,11 @@ function TestPlanRow({ browser, instructionCount, name, updatePlan }) {
         />
       </div>
 
-      <div>
-
+      <div
+        className='cursor-pointer text-xs'
+        onClick={ () => removePlan() }
+      >
+        Remove
       </div>
 
     </div>
@@ -171,7 +182,8 @@ TestPlanRow.propTypes = {
   browser: PropTypes.string.isRequired,
   instructionCount: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
-  updatePlan: PropTypes.func.isRequired
+  updatePlan: PropTypes.func.isRequired,
+  removePlan: PropTypes.func.isRequired
 }
 
 function Label({ id, text }) {
