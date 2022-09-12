@@ -40,6 +40,22 @@ export function EditTestSuiteRoute() {
     console.log(JSON.stringify(draft, null, 2))
   }
 
+  const addTestPlanHandler = e => {
+    e.preventDefault()
+
+    setDraft({
+      ...draft,
+      test_plans: [
+        ...draft.test_plans,
+        {
+          test_name: '',
+          browser: 'chrome',
+          instruction_count: 0
+        }
+      ]
+    })
+  }
+
   return (
     <div className='flex flex-col gap-8'>
       <h1 className='text-xl' >
@@ -81,6 +97,16 @@ export function EditTestSuiteRoute() {
               />
             ))
           }
+
+          <div className='mt-4'>
+            <button
+              className='text-xs p-2 outline-none border border-slate-300 rounded w-60 max-w-full cursor-pointer hover:bg-gray-50'
+              onClick={ addTestPlanHandler }
+            >
+              Add Test Plan
+            </button>
+          </div>
+
         </div>
 
         <button
