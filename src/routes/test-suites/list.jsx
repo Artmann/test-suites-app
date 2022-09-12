@@ -9,6 +9,9 @@ export function ListTestSuitesRoute() {
 
   return (
     <div className='flex flex-col gap-8'>
+      <h1 className='text-xl' >
+        Test Suites
+      </h1>
       {
         testSuites.map((testSuite) => (
           <TestSuiteRow
@@ -56,18 +59,18 @@ function TestSuiteRow({ id, name, testPlans }) {
   return (
     <div
       className={`
-      max-w-lg
-      bg-white hover:bg-gray-50
-      border border-slate-100 rounded-xl shadow-sm
-      text-sm
-    `}
+        max-w-lg
+        bg-white hover:bg-gray-50
+        border border-slate-100 rounded-xl shadow-sm
+        text-sm
+      `}
       onClick={() => setIsExpanded(!isExpanded)}
     >
       <div
         className={`
-        flex p-4
-        ${isExpanded ? 'border-b border-slate-100' : ''}
-      `}
+          flex p-4
+          ${isExpanded ? 'border-b border-slate-100' : ''}
+        `}
       >
         <div className='flex-1 font-medium truncate'>
           {name}

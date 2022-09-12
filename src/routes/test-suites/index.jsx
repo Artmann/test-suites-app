@@ -10,7 +10,7 @@ export function TestSuitesRoute() {
 
   useEffect(() => {
     fetchTestSuites()
-  }, [])
+  }, [ fetchTestSuites ])
 
   if (error) {
     return <ErrorPage error='Could not load Test Suites. Please try again.' />
