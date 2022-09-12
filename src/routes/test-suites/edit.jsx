@@ -7,6 +7,26 @@ import { useParams } from 'react-router-dom'
 import { ErrorPage } from '../../components/error-page'
 import { StoreContext } from '../../store'
 
+function validate(draft) {
+  const isBlank = str => !str || /^\s*$/.test(str)
+
+  if (isBlank(draft.test_suite_name)) {
+    return 'The test suite must have a name.'
+  }
+
+  if (draft.test_plans.length === 0) {
+    return 'The test suite must have at least one test plan.'
+  }
+
+  if (draft.test_plans.some(plan => isBlank(plan.test_name))) {
+    return 'Each test plan must have a name.'
+  }
+
+  if (draft.test_plans.some(plan => plan.instruction_count < 1)) {
+    return 'Each test plan must have at least one instruction.'
+  }
+}
+
 export function EditTestSuiteRoute() {
   const { id } = useParams()
   const { testSuites } = useContext(StoreContext)
@@ -14,6 +34,7 @@ export function EditTestSuiteRoute() {
   const testSuite = testSuites.find(testSuite => testSuite.id.toString() === id)
 
   const [ draft, setDraft ] = useState(testSuite)
+  const [ error, setError ] = useState()
 
   const updateDraft = (key, value) => {
     setDraft({
@@ -49,9 +70,9 @@ export function EditTestSuiteRoute() {
       test_plans: [
         ...draft.test_plans,
         {
-          test_name: '',
+          test_name: 'New Test Plan',
           browser: 'chrome',
-          instruction_count: 0
+          instruction_count: 1
         }
       ]
     })
@@ -60,7 +81,37 @@ export function EditTestSuiteRoute() {
   const submitHandler = (e) => {
     e.preventDefault()
 
+    setError()
+
+    const error = validate(draft)
+
+    if (error) {
+      setError(error)
+
+      return
+    }
+
     console.log(JSON.stringify(draft, null, 2))
+  }
+
+  const ErrorMessage = () => {
+    if (!error) {
+      return null
+    }
+
+    return (
+      <div
+        className={`
+          bg-red-100
+          text-sm text-red-700
+          border border-red-200
+          p-2
+        `}
+        data-testid='error-message'
+      >
+        { error }
+      </div>
+    )
   }
 
   return (
@@ -68,6 +119,8 @@ export function EditTestSuiteRoute() {
       <h1 className='text-xl' >
         Edit Test Suite
       </h1>
+
+      <ErrorMessage />
 
       <form
         className='flex flex-col gap-8'
